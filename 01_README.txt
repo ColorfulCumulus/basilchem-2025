@@ -9,6 +9,7 @@ Data files associated with Clemente et al (202x), "Characterization of floral vo
 ## Data analysis: Seanne R. Clemente
 
 
+
 # METADATA
 
 ##FILENAME: basil_chemicals_all.csv
@@ -24,7 +25,7 @@ Data files associated with Clemente et al (202x), "Characterization of floral vo
 
 ##FILENAME: regressions.csv
 
-### origin: This datafile was created using "0_multivar_basil.R" Running the entirety of the .R file 	will create this .csv file anew.
+### origin: This datafile was created using "02_multivar_basil.R" Running the entirety of the .R file 	will create this .csv file anew.
 
 ## list of variables:
 ### columns 1-71 are the average quantities of VOCS collected from floral tissue per cultivar, in 	ng/g/hr 
