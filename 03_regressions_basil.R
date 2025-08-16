@@ -1,6 +1,6 @@
 # Regressions for basil VOC data - all varieties
 # originally created by SC / 4 April 2024
-# last updated by SC / 4 April 2024
+# last updated by SC / 16 August 2025
 
 # 1 - SETUP ####
 # opening packages, uploading data
@@ -27,11 +27,14 @@ eq <- function(x,y) {
 }
 
 # extract floral values 
-flowers <- chems[,2:72]
-names(flowers) <- names(leaves)
+flowers <- chems[,2:71]
 
 # extract leaf values (even numbered columns)
-leaves <- chems[,73:143]
+leaves <- chems[,72:141]
+
+#renaming
+names(flowers) <- names(leaves)
+
 
 
 # create correlation plot
@@ -48,7 +51,7 @@ lvf <-corr.data[which(corr.data$Var1 == corr.data$Var2),]
 lvf<- lvf[order(-abs(lvf$value)), ]
 
 # 2 - Getting the top 30 correlated compounds ####
-lvf$Var1[1:30] 
+lvf$Var1[1:50] 
   # note that many compounds are perfectly correlated
   # or close to so
   # because only one variety contains that compound
@@ -62,8 +65,8 @@ estragole <- ggplot(chems, aes(x=`Estragole`, y = `Estragole floral`))+
   geom_point() +
   geom_smooth(method = lm, color = "blue", se = TRUE) +  
   geom_label(
-    x = 6500, 
-    y = 3500, 
+    x = 2500, 
+    y = 75000, 
     label = eq(chems$Estragole, chems$`Estragole floral`), 
     fontface = "bold",
     size = 4,
@@ -74,7 +77,8 @@ estragole <- ggplot(chems, aes(x=`Estragole`, y = `Estragole floral`))+
                                 label = variety),
                   fontface = "bold",
                   min.segment.length = 10,
-                  size = 4)
+                  size = 4,
+                  max.overlaps = 20)
 estragole <- estragole + labs(x = "Estragole", 
                               y = "")
 estragole <- estragole  + theme(axis.title = element_text(size = 12, face = "bold"))
@@ -354,21 +358,21 @@ DMNT
 
 # alpha-terpineol 
 if(TRUE){
-summary(lm(`alpha-Terpineol floral` ~ `alpha-Terpineol`, data = chems)) #ns
+summary(lm(`ɑ-Terpineol floral` ~ `ɑ-Terpineol`, data = chems)) #ns
 
-a_terpine <- ggplot(chems, aes(x=`alpha-Terpineol`, y = `alpha-Terpineol floral`))+
+a_terpine <- ggplot(chems, aes(x=`ɑ-Terpineol`, y = `ɑ-Terpineol floral`))+
   geom_point() +
   geom_smooth(method = lm, color = "blue", se = TRUE) +  
   geom_label(
     x = 50, 
     y = 1350, 
-    label = eq(chems$`alpha-Terpineol`, chems$`alpha-Terpineol floral`), 
+    label = eq(chems$`ɑ-Terpineol`, chems$`ɑ-Terpineol floral`), 
     fontface = "bold",
     size = 4,
     parse = TRUE) +
   geom_text_repel(data = chems, 
-                  mapping = aes(x = `alpha-Terpineol`,
-                                `alpha-Terpineol floral`,
+                  mapping = aes(x = `ɑ-Terpineol`,
+                                `ɑ-Terpineol floral`,
                                 label = variety),
                   fontface = "bold",
                   min.segment.length = 10,
@@ -428,27 +432,27 @@ bornyl_acetate}
 # row 3: unk 43/81/105, a-Amorphene, Germacrene D, unk 43/105/204####
 #unknown 43, 69, 55
 if(TRUE){
-summary(lm(`Unknown 43, 69, 55 floral` ~ `Unknown 43, 69, 55`, data = chems)) #ns
+summary(lm(`Unknown 97, 111, 70, 71 floral` ~ `Unknown 97, 111, 70, 71`, data = chems)) #ns
 
-unknown43a <- ggplot(chems, aes(x=`Unknown 43, 69, 55`, y = `Unknown 43, 69, 55 floral`))+
+unknown43a <- ggplot(chems, aes(x=`Unknown 97, 111, 70, 71`, y = `Unknown 97, 111, 70, 71 floral`))+
   geom_point() +
   geom_smooth(method = lm, color = "blue", se = TRUE,
               linetype = "dashed") +  
   geom_label(
     x = 200, 
     y = 220, 
-    label = eq(chems$`Unknown 43, 69, 55`, chems$`Unknown 43, 69, 55 floral`), 
+    label = eq(chems$`Unknown 97, 111, 70, 71`, chems$`Unknown 97, 111, 70, 71 floral`), 
     fontface = "bold",
     size = 4,
     parse = TRUE) +
   geom_text_repel(data = chems, 
-                  mapping = aes(x = `Unknown 43, 69, 55`,
-                                `Unknown 43, 69, 55 floral`,
+                  mapping = aes(x = `Unknown 97, 111, 70, 71`,
+                                `Unknown 97, 111, 70, 71 floral`,
                                 label = variety),
                   fontface = "bold",
                   min.segment.length = 1,
                   size = 4)
-unknown43a <- unknown43a + labs(x = "Unk. 43, 69, 55", 
+unknown43a <- unknown43a + labs(x = "Unk. 97, 111, 70, 71", 
                               y = "")
 unknown43a <- unknown43a + theme(axis.title = element_text(size = 12, face = "bold"))
 unknown43a <- unknown43a + theme(axis.text = element_text(size = 10))
@@ -465,22 +469,22 @@ unknown43a
 
 #amorphene
 if(TRUE){
-summary(lm(`alpha-Amorphene floral` ~ `alpha-Amorphene`, data = chems))# ns
+summary(lm(`ɑ-Amorphene floral` ~ `ɑ-Amorphene`, data = chems))# ns
 
-amorphene <- ggplot(chems, aes(x=`alpha-Amorphene`, y = `alpha-Amorphene floral`))+
+amorphene <- ggplot(chems, aes(x=`ɑ-Amorphene`, y = `ɑ-Amorphene floral`))+
   geom_point() +
   geom_smooth(method = lm, color = "blue", se = TRUE,
               linetype = "dashed") +  
   geom_label(
     x = 26, 
     y = 670, 
-    label = eq(chems$`alpha-Amorphene`, chems$`alpha-Amorphene floral`), 
+    label = eq(chems$`ɑ-Amorphene`, chems$`ɑ-Amorphene floral`), 
     fontface = "bold",
     size = 4,
     parse = TRUE) +
   geom_text_repel(data = chems, 
-                  mapping = aes(x = `alpha-Amorphene`,
-                                `alpha-Amorphene floral`,
+                  mapping = aes(x = `ɑ-Amorphene`,
+                                `ɑ-Amorphene floral`,
                                 label = variety),
                   fontface = "bold",
                   min.segment.length = 1,
@@ -538,26 +542,26 @@ germacrene}
 
 #unknown 43, 81, 105
 if(TRUE){
-summary(lm(`Unknown 43, 81, 105 floral` ~ `Unknown 43, 81, 105`, data = chems))# sig
+summary(lm(`Unknown 81, 105, 119, 161 floral` ~ `Unknown 81, 105, 119, 161`, data = chems))# sig
 
-unknown43b <- ggplot(chems, aes(x=`Unknown 43, 81, 105`, y = `Unknown 43, 81, 105 floral`))+
+unknown43b <- ggplot(chems, aes(x=`Unknown 81, 105, 119, 161`, y = `Unknown 81, 105, 119, 161 floral`))+
   geom_point() +
   geom_smooth(method = lm, color = "blue", se = TRUE) +  
   geom_label(
     x = 20, 
     y = 130, 
-    label = eq(chems$`Unknown 43, 81, 105`, chems$`Unknown 43, 81, 105 floral`), 
+    label = eq(chems$`Unknown 81, 105, 119, 161`, chems$`Unknown 81, 105, 119, 161 floral`), 
     fontface = "bold",
     size = 4,
     parse = TRUE) +
   geom_text_repel(data = chems, 
-                  mapping = aes(x = `Unknown 43, 81, 105`,
-                                `Unknown 43, 81, 105 floral`,
+                  mapping = aes(x = `Unknown 81, 105, 119, 161`,
+                                `Unknown 81, 105, 119, 161 floral`,
                                 label = variety),
                   fontface = "bold",
                   min.segment.length = 10,
                   size = 4)
-unknown43b <- unknown43b + labs(x = "Unk. 43, 81, 105",
+unknown43b <- unknown43b + labs(x = "Unk. 81, 105, 119, 161",
                                 y = "",
                                 size = 6.5)
 unknown43b <- unknown43b  + theme(axis.title = element_text(size = 10, face = "bold"))
@@ -614,27 +618,27 @@ aciphyllene <- aciphyllene + theme(axis.line = element_line(colour = "black"),
 aciphyllene}
 #unknown 95, 161, 107
 if(TRUE){
-summary(lm(`Unknown 95, 161, 107 floral` ~ `Unknown 95, 161, 107`, data = chems))# ns
+summary(lm(`Unknown 95, 161, 107, 93 floral` ~ `Unknown 95, 161, 107, 93`, data = chems))# ns
 
-unknown95 <- ggplot(chems, aes(x=`Unknown 95, 161, 107`, y = `Unknown 95, 161, 107 floral`))+
+unknown95 <- ggplot(chems, aes(x=`Unknown 95, 161, 107, 93`, y = `Unknown 95, 161, 107, 93 floral`))+
   geom_point() +
   geom_smooth(method = lm, color = "blue", se = TRUE,
               linetype = "dashed") +  
   geom_label(
     x = 170, 
     y = 90, 
-    label = eq(chems$`Unknown 95, 161, 107`, chems$`Unknown 95, 161, 107 floral`), 
+    label = eq(chems$`Unknown 95, 161, 107, 93`, chems$`Unknown 95, 161, 107, 93 floral`), 
     fontface = "bold",
     size = 4,
     parse = TRUE) +
   geom_text_repel(data = chems, 
-                  mapping = aes(x = `Unknown 95, 161, 107`,
-                                `Unknown 95, 161, 107 floral`,
+                  mapping = aes(x = `Unknown 95, 161, 107, 93`,
+                                `Unknown 95, 161, 107, 93 floral`,
                                 label = variety),
                   fontface = "bold",
                   min.segment.length = 1,
                   size = 4)
-unknown95 <- unknown95 + labs(x = "Unk. 95, 161, 107", 
+unknown95 <- unknown95 + labs(x = "Unk. 95, 161, 107, 93", 
                               y = "")
 unknown95 <- unknown95 + theme(axis.title = element_text(size = 12, face = "bold"))
 unknown95 <- unknown95 + theme(axis.text = element_text(size = 10))
@@ -687,20 +691,97 @@ valencene <- valencene    + theme(axis.line = element_line(colour = "black"),
 
 valencene}
 
+# a-bergamotene ####
+if(TRUE){
+summary(lm(`ɑ-Bergamotene floral` ~ `ɑ-Bergamotene`, data = chems)) #ns
+
+bergamotene <- ggplot(chems, aes(x=`ɑ-Bergamotene`, y = `ɑ-Bergamotene floral`))+
+  geom_point() +
+  geom_smooth(method = lm, color = "blue", se = TRUE,
+              linetype = "dashed") +  
+  geom_label(
+    x = 7600, 
+    y = -15000, 
+    label = eq(chems$`ɑ-Bergamotene`, chems$`ɑ-Bergamotene floral`), 
+    fontface = "bold",
+    size = 4,
+    parse = TRUE) +
+  geom_text_repel(data = chems, 
+                  mapping = aes(x = `ɑ-Bergamotene`,
+                                `ɑ-Bergamotene floral`,
+                                label = variety),
+                  fontface = "bold",
+                  min.segment.length = 1,
+                  size = 4,
+                  max.overlaps = 20)
+bergamotene <- bergamotene + labs(x = "Leaf concentration, ng/h/g", 
+                                  y = "Floral concentration, ng/h/g")
+bergamotene <- bergamotene + theme(axis.title = element_text(size = 10))
+bergamotene <- bergamotene + theme(axis.text = element_text(size = 10))
+
+
+bergamotene <- bergamotene + theme(legend.position = "none")
+bergamotene <- bergamotene + theme(axis.line = element_line(colour = "black"),
+                                   panel.grid.major = element_blank(),
+                                   panel.grid.minor = element_blank(),
+                                   panel.border = element_blank(),
+                                   panel.background = element_blank())
+
+bergamotene <- bergamotene + labs(x = "alpha-Bergamotene", 
+                              y = "")
+bergamotene <- bergamotene    + theme(axis.title = element_text(size = 12, face = "bold"))
+bergamotene <- bergamotene   + theme(axis.text = element_text(size = 10))
+bergamotene}
+
+#a-cadinene ####
+if(TRUE){
+summary(lm(`ɑ-Cadinene floral` ~ `ɑ-Cadinene`, data = chems))# ns
+
+a_cadinene <- ggplot(chems, aes(x=`ɑ-Cadinene`, y = `ɑ-Cadinene floral`))+
+  geom_point() +
+  geom_smooth(method = lm, color = "blue", se = TRUE,
+              linetype = "dashed") +  
+  geom_label(
+    x = 9, 
+    y = -120, 
+    label = eq(chems$`ɑ-Cadinene`, chems$`ɑ-Cadinene floral`), 
+    fontface = "bold",
+    size = 4,
+    parse = TRUE) +
+  geom_text_repel(data = chems, 
+                  mapping = aes(x = `ɑ-Cadinene`,
+                                `ɑ-Cadinene floral`,
+                                label = variety),
+                  fontface = "bold",
+                  min.segment.length = 1,
+                  size = 4)
+a_cadinene <- a_cadinene + labs(x = "alpha-Cadinene", 
+                                y = "")
+a_cadinene <- a_cadinene + theme(axis.title = element_text(size = 12, face = "bold"))
+a_cadinene <- a_cadinene + theme(axis.text = element_text(size = 10))
+
+
+a_cadinene <- a_cadinene + theme(legend.position = "none")
+a_cadinene <- a_cadinene + theme(axis.line = element_line(colour = "black"),
+                                 panel.grid.major = element_blank(),
+                                 panel.grid.minor = element_blank(),
+                                 panel.border = element_blank(),
+                                 panel.background = element_blank())
+a_cadinene}
 
 # stitching it all together ####
 # publishing the positive correlates
-regressions <- ggarrange(eugenol, M_eugenol, eucalyptol, linalool,
+regressions <- ggarrange(linalool, estragole, bergamotene, M_eugenol,
                          humulene, DMNT, a_terpine, bornyl_acetate,
-                         unknown43a, amorphene,germacrene, unknown43b, 
-                         aciphyllene, unknown95, valencene, estragole,
+                         unknown43a, amorphene, germacrene, unknown43b, 
+                         aciphyllene, unknown95, valencene, a_cadinene,
                          labels = c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
                                     "M", "N", "O", "P"),
-                         font.label = list(size = 20, color = "black", face = "bold", family = NULL),
+                         font.label = list(size = 16, color = "black", face = "bold", family = NULL),
                          ncol = 4, nrow = 4)
 
 ggsave(plot = regressions,
-       filename = "Fig_2.pdf",
+       filename = "Fig_S1.pdf",
        width = 3000,
        height = 2700, 
        units = "px")
@@ -740,39 +821,7 @@ if(FALSE){
                                          panel.border = element_blank(),
                                          panel.background = element_blank())
   
-  # 6: a-bergamotene ####
-  summary(lm(a_Bergamotene_floral ~ a_Bergamotene, data = chems)) #ns
-  
-  bergamotene <- ggplot(chems, aes(x=a_Bergamotene, y = a_Bergamotene_floral))+
-    geom_point() +
-    geom_smooth(method = lm, color = "blue", se = FALSE,
-                linetype = "dashed") +  
-    geom_label(
-      x = 9000, 
-      y = 100, 
-      label = eq(chems$a_Bergamotene, chems$a_Bergamotene_floral), 
-      fontface = "bold",
-      size = 6.5,
-      parse = TRUE) +
-    geom_text_repel(data = chems, 
-                    mapping = aes(x = a_Bergamotene,
-                                  a_Bergamotene_floral,
-                                  label = variety),
-                    fontface = "bold",
-                    min.segment.length = 10,
-                    size = 6.5)
-  bergamotene <- bergamotene + labs(x = "Leaf concentration, ng/h/g", 
-                                    y = "Floral concentration, ng/h/g")
-  bergamotene <- bergamotene + theme(axis.title = element_text(size = 10))
-  bergamotene <- bergamotene + theme(axis.text = element_text(size = 10))
-  
-  
-  bergamotene <- bergamotene + theme(legend.position = "none")
-  bergamotene <- bergamotene + theme(axis.line = element_line(colour = "black"),
-                                     panel.grid.major = element_blank(),
-                                     panel.grid.minor = element_blank(),
-                                     panel.border = element_blank(),
-                                     panel.background = element_blank())
+
   # 7: 4-hexenyl acetate ####
   summary(lm(X4_hexen_yl_acetate_floral ~ X4_hexen_yl_acetate, data = chems)) #sig
   
@@ -1284,39 +1333,7 @@ if(FALSE){
                                          panel.border = element_blank(),
                                          panel.background = element_blank())
   
-  # 38: a-cadinene ####
-  summary(lm(a_Cadinene_floral ~ a_Cadinene, data = chems))# ns
-  
-  a_cadinene <- ggplot(chems, aes(x=a_Cadinene, y = a_Cadinene_floral))+
-    geom_point() +
-    geom_smooth(method = lm, color = "blue", se = TRUE,
-                linetype = "dashed") +  
-    geom_label(
-      x = 10, 
-      y = 75, 
-      label = eq(chems$a_Cadinene, chems$a_Cadinene_floral), 
-      fontface = "bold",
-      size = 4,
-      parse = TRUE) +
-    geom_text_repel(data = chems, 
-                    mapping = aes(x = a_Cadinene,
-                                  a_Cadinene_floral,
-                                  label = variety),
-                    fontface = "bold",
-                    min.segment.length = 1,
-                    size = 4)
-  a_cadinene <- a_cadinene + labs(x = "a-Cadinene", 
-                                  y = "")
-  a_cadinene <- a_cadinene + theme(axis.title = element_text(size = 12, face = "bold"))
-  a_cadinene <- a_cadinene + theme(axis.text = element_text(size = 10))
-  
-  
-  a_cadinene <- a_cadinene + theme(legend.position = "none")
-  a_cadinene <- a_cadinene + theme(axis.line = element_line(colour = "black"),
-                                   panel.grid.major = element_blank(),
-                                   panel.grid.minor = element_blank(),
-                                   panel.border = element_blank(),
-                                   panel.background = element_blank())
+
   
   # 39: trans-geraniol ####
   geraniol <- ggplot(chems, aes(x=trans_Geraniol, y = trans_Geraniol_floral))+
